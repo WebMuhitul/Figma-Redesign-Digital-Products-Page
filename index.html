@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solutions - Python & VBA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Consistent Styling */
+        :root {
+            --primary-blue: #2C5282;
+            --secondary-green: #38A169;
+            --dark-gray: #2D3748;
+            --medium-gray: #4A5568;
+            --light-gray: #E2E8F0;
+            --white: #FFFFFF;
+            --spacing-unit: 8px;
+            --border-radius: 8px;
+            --box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--medium-gray);
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark-gray);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-green);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #1a365d;
+        }
+
+        .btn-secondary {
+            background-color: var(--white);
+            color: var(--primary-blue);
+            border: 1px solid var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-gray);
+        }
+
+        .btn-tertiary {
+            background-color: transparent;
+            color: var(--primary-blue);
+            padding: 8px 16px;
+        }
+
+        .btn-tertiary:hover {
+            text-decoration: underline;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: calc(var(--spacing-unit) * 2) 0;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .main-nav {
+            display: flex;
+            list-style: none;
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        .main-nav a {
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary-green);
+            color: var(--white);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark-gray);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-color: var(--white);
+            padding: calc(var(--spacing-unit) * 8) 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto calc(var(--spacing-unit) * 4);
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto calc(var(--spacing-unit) * 4);
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 16px 24px 16px 50px;
+            border: 1px solid var(--light-gray);
+            border-radius: 50px;
+            font-size: 16px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-bar:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--medium-gray);
+        }
+
+        .filter-pills {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .filter-pill {
+            padding: 8px 16px;
+            background-color: var(--light-gray);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark-gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-pill:hover, .filter-pill.active {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: calc(var(--spacing-unit) * 8) 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .sort-dropdown {
+            padding: 8px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            background-color: var(--white);
+            font-size: 16px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: calc(var(--spacing-unit) * 3);
+        }
+
+        .product-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary-blue);
+        }
+
+        .product-content {
+            padding: calc(var(--spacing-unit) * 3);
+        }
+
+        .product-title {
+            font-size: 20px;
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .product-description {
+            font-size: 14px;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            color: var(--medium-gray);
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit));
+            font-size: 14px;
+        }
+
+        .stars {
+            color: #ffc107;
+        }
+
+        .product-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit));
+            margin-top: calc(var(--spacing-unit) * 2);
+        }
+
+        .load-more {
+            text-align: center;
+            margin-top: calc(var(--spacing-unit) * 6);
+        }
+
+        /* Product Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 1000px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--medium-gray);
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .close-modal:hover {
+            color: var(--dark-gray);
+        }
+
+        .modal-body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .modal-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 64px;
+            color: var(--primary-blue);
+        }
+
+        .modal-details {
+            flex: 1;
+            min-width: 300px;
+            padding: calc(var(--spacing-unit) * 4);
+        }
+
+        .modal-title {
+            font-size: 28px;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .modal-price {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .modal-description {
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .feature-list li {
+            padding: calc(var(--spacing-unit)) 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li i {
+            color: var(--secondary-green);
+            margin-right: calc(var(--spacing-unit) * 2);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 4);
+        }
+
+        .reviews-section {
+            margin-top: calc(var(--spacing-unit) * 4);
+        }
+
+        .review {
+            padding: calc(var(--spacing-unit) * 2) 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+        }
+
+        .review-date {
+            font-size: 14px;
+            color: var(--medium-gray);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: calc(var(--spacing-unit) * 8) 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: calc(var(--spacing-unit) * 4);
+            margin-bottom: calc(var(--spacing-unit) * 6);
+        }
+
+        .footer-column h3 {
+            color: var(--white);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            font-size: 18px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: calc(var(--spacing-unit));
+        }
+
+        .footer-column a {
+            color: #cbd5e0;
+        }
+
+        .footer-column a:hover {
+            color: var(--white);
+        }
+
+        .newsletter {
+            max-width: 400px;
+        }
+
+        .newsletter p {
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: var(--border-radius) 0 0 var(--border-radius);
+            outline: none;
+        }
+
+        .newsletter-btn {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background-color: #1a365d;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: calc(var(--spacing-unit) * 4);
+            border-top: 1px solid #4a5568;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-top: calc(var(--spacing-unit) * 3);
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: #4a5568;
+            border-radius: 50%;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary-blue);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 24px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .filter-pills {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: calc(var(--spacing-unit));
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .modal-body {
+                flex-direction: column;
+            }
+
+            .modal-image {
+                height: 250px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">Python & VBA</div>
+            
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#" class="active">Solutions</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <div class="search-icon">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="user-icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">3</span>
+                </div>
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Professional Solutions for Python & VBA Development</h1>
+            <p>Streamline your workflow with our expertly crafted digital products</p>
+            
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-bar" placeholder="Search solutions...">
+            </div>
+            
+            <div class="filter-pills">
+                <div class="filter-pill active">All Products</div>
+                <div class="filter-pill">Python Tools</div>
+                <div class="filter-pill">VBA Templates</div>
+                <div class="filter-pill">Bundles</div>
+                <div class="filter-pill">Newest</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Solutions</h2>
+                <select class="sort-dropdown">
+                    <option>Sort by: Newest</option>
+                    <option>Price: Low to High</option>
+                    <option>Price: High to Low</option>
+                    <option>Top Rated</option>
+                </select>
+            </div>
+            
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Excel Automation Toolkit</h3>
+                        <p class="product-description">Complete VBA solution for automating Excel tasks with 50+ pre-built macros.</p>
+                        <div class="product-footer">
+                            <div class="product-price">$49.99</div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>(24)</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-tertiary preview-btn">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Python Data Analysis Bundle</h3>
+                        <p class="product-description">Comprehensive Python scripts for data cleaning, analysis, and visualization.</p>
+                        <div class="product-footer">
+                            <div class="product-price">$79.99</div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(42)</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-tertiary preview-btn">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Database Integration Suite</h3>
+                        <p class="product-description">Seamlessly connect Excel with SQL databases using VBA and Python.</p>
+                        <div class="product-footer">
+                            <div class="product-price">$59.99</div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>(18)</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-tertiary preview-btn">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Financial Modeling Templates</h3>
+                        <p class="product-description">Advanced Excel templates for financial forecasting and analysis.</p>
+                        <div class="product-footer">
+                            <div class="product-price">$69.99</div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>(31)</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-tertiary preview-btn">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Automation Script Collection</h3>
+                        <p class="product-description">100+ Python scripts for automating repetitive tasks across applications.</p>
+                        <div class="product-footer">
+                            <div class="product-price">$89.99</div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span>(56)</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-tertiary preview-btn">Preview</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <div class="product-content">
+                        <h3 class="product-title">Report Generation Toolkit</h3>
+                        <p class="product-description">Automate PowerPoint and Excel report generation with VBA and Python.</p>
+                        <div class="product-footer">
+                            <div class="product-price">$54.99</div>
+                            <div class="product-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span>(22)</span>
+                            </div>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-tertiary preview-btn">Preview</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="load-more">
+                <button class="btn btn-secondary">Load More Products</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <i class="fas fa-file-excel"></i>
+                </div>
+                <div class="modal-details">
+                    <h2 class="modal-title">Excel Automation Toolkit</h2>
+                    <div class="modal-price">$49.99</div>
+                    <p class="modal-description">Complete VBA solution for automating Excel tasks with 50+ pre-built macros. This toolkit includes everything you need to streamline your Excel workflows and save hours of manual work.</p>
+                    
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> 50+ pre-built automation macros</li>
+                        <li><i class="fas fa-check-circle"></i> Step-by-step implementation guide</li>
+                        <li><i class="fas fa-check-circle"></i> Customizable templates</li>
+                        <li><i class="fas fa-check-circle"></i> Video tutorials included</li>
+                        <li><i class="fas fa-check-circle"></i> Lifetime updates</li>
+                    </ul>
+                    
+                    <div class="modal-actions">
+                        <button class="btn btn-primary">Add to Cart</button>
+                        <button class="btn btn-secondary">Buy Now</button>
+                    </div>
+                    
+                    <div class="reviews-section">
+                        <h3>Customer Reviews</h3>
+                        
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="reviewer-name">John Smith</div>
+                                <div class="review-date">May 15, 2023</div>
+                            </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>This toolkit saved me countless hours on my monthly reporting. Highly recommended!</p>
+                        </div>
+                        
+                        <div class="review">
+                            <div class="review-header">
+                                <div class="reviewer-name">Sarah Johnson</div>
+                                <div class="review-date">April 2, 2023</div>
+                            </div>
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <p>Great collection of macros. The documentation could be a bit more detailed, but overall very useful.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="#">Python Tools</a></li>
+                        <li><a href="#">VBA Templates</a></li>
+                        <li><a href="#">Bundles</a></li>
+                        <li><a href="#">New Releases</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Refund Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column newsletter">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to get special offers and updates on new products.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Python & VBA Solutions. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu-toggle').addEventListener('click', function() {
+            const mainNav = document.querySelector('.main-nav');
+            if (mainNav.style.display === 'flex') {
+                mainNav.style.display = 'none';
+            } else {
+                mainNav.style.display = 'flex';
+                mainNav.style.position = 'absolute';
+                mainNav.style.top = '70px';
+                mainNav.style.left = '0';
+                mainNav.style.width = '100%';
+                mainNav.style.backgroundColor = 'var(--white)';
+                mainNav.style.flexDirection = 'column';
+                mainNav.style.padding = '20px';
+                mainNav.style.boxShadow = 'var(--box-shadow)';
+            }
+        });
+
+        // Filter Pills
+        const filterPills = document.querySelectorAll('.filter-pill');
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', function() {
+                filterPills.forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                // In a real application, this would filter the products
+            });
+        });
+
+        // Product Modal
+        const modal = document.getElementById('productModal');
+        const previewBtns = document.querySelectorAll('.preview-btn');
+        const closeModal = document.querySelector('.close-modal');
+
+        previewBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', function() {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Add to Cart functionality
+        const addToCartBtns = document.querySelectorAll('.btn-primary');
+        const cartCount = document.querySelector('.cart-count');
+        let count = 3; // Initial cart count
+
+        addToCartBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                count++;
+                cartCount.textContent = count;
+                
+                // Visual feedback
+                const originalText = this.textContent;
+                this.textContent = 'Added!';
+                this.style.backgroundColor = 'var(--secondary-green)';
+                
+                setTimeout(() => {
+                    this.textContent = originalText;
+                    this.style.backgroundColor = '';
+                }, 1500);
+            });
+        });
+
+        // Newsletter Form
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('.newsletter-input');
+            if (emailInput.value) {
+                alert('Thank you for subscribing with: ' + emailInput.value);
+                emailInput.value = '';
+            }
+        });
+
+        // Sort Dropdown
+        document.querySelector('.sort-dropdown').addEventListener('change', function() {
+            // In a real application, this would sort the products
+            console.log('Sort by:', this.value);
+        });
+
+        // Load More Products
+        document.querySelector('.load-more .btn-secondary').addEventListener('click', function() {
+            // In a real application, this would load more products
+            alert('Loading more products...');
+        });
+    </script>
+</body>
+</html>
